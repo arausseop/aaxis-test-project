@@ -13,6 +13,6 @@
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 
-###> Mac Files###
+###> OSX files ###
 .DS_Store
-###< Mac Files###
+###< OSX files ###
