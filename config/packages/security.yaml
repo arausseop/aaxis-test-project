@@ -6,6 +6,12 @@ security:
     providers:
         users_in_memory: { memory: null }
     firewalls:
+        api_doc:
+            pattern:    ^/api/doc
+            security:   false
+        api:
+            pattern: ^/api
+            security: false
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -24,6 +30,9 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/doc, roles: PUBLIC_ACCESS }
+        - { path: ^/api, role: ROLE_USER }
+        - { path: ^/, role: ROLE_USER }
 
 when@test:
     security:
