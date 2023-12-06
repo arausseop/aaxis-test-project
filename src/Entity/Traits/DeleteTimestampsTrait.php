@@ -28,8 +28,8 @@ trait DeleteTimestampsTrait
     #[ORM\PreRemove]
     public function setDeletedAtAutomatically()
     {
-        $this->deleted = true;
         if ($this->getDeletedAt() === null) {
+            $this->deleted = true;
             $this->setDeletedAt(new \DateTime());
         }
     }
