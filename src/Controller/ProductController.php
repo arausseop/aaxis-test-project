@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\Product\GetProduct;
 use App\Service\Product\ProductManager;
+use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +20,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ProductController extends AbstractFOSRestController
 {
     #[Rest\Get('', name: 'list')]
-    public function healthCheckAction(
+    public function getAction(
         ProductManager $productManager,
         SerializerInterface $serializer,
         Request $request,
@@ -26,6 +29,21 @@ class ProductController extends AbstractFOSRestController
         $products =  $productManager->getRepository()->findAll();
         $data = $serializer->serialize($products, 'json', ['groups' => ['products-list']]);
         return JsonResponse::fromJsonString($data, Response::HTTP_OK);
+    }
+
+    #[Rest\Get('/{id}')]
+    public function getSingleAction(
+        int $id,
+        GetProduct $getProduct,
+        SerializerInterface $serializer
+    ) {
+        try {
+            $product = ($getProduct)($id);
+        } catch (Exception $exception) {
+            return View::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+        $data = $serializer->serialize($product, 'json', ['groups' => ['products-show']]);
+        return JsonResponse::fromJsonString($data);
     }
 
     #[Rest\Post('', name: 'create')]

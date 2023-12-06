@@ -2,29 +2,35 @@ App\Entity\Product:
     attributes:
         id:
             groups:
-                - 'products'
+                - 'products-admin'
+                - 'products-list'
         productName:
             groups:
-                - 'products'
+                - 'products-admin'
                 - 'products-list'
+                - products-show
         sku:
             groups:
-                - 'products'
+                - 'products-admin'
                 - 'products-list'
+                - products-show
         description:
             groups:
-                - 'products'
+                - 'products-admin'
+                - products-show
         createdAt:
             groups:
-                - 'products'
+                - 'products-admin'
                 - 'products-list'
+                - products-show
         updatedAt:
             groups:
-                - 'products'
+                - 'products-admin'
                 - 'products-list'
+                - products-show
         deleted:
             groups:
-                - 'products'
+                - 'products-admin'
         deletedAt:
             groups:
-                - 'products'
+                - 'products-admin'

@@ -3,7 +3,7 @@
 namespace App\Service\Product;
 
 use App\Entity\Product;
-use App\Model\Exception\Product\ProductNotFound;
+use App\Model\Product\Exception\ProductNotFound;
 use App\Repository\ProductRepository;
 
 
@@ -16,9 +16,9 @@ class GetProduct
         $this->productRepository = $productRepository;
     }
 
-    public function __invoke(string $uuid): Product
+    public function __invoke(int $id): Product
     {
-        $product = $this->productRepository->findOneByUuid($uuid);
+        $product = $this->productRepository->findOneById($id);
 
         if (!$product) {
             ProductNotFound::throwException();
