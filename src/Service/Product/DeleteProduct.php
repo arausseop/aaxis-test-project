@@ -14,9 +14,11 @@ class DeleteProduct
         $this->productManager = $productManager;
     }
 
-    public function __invoke(string $uuid)
+    public function __invoke(int $id, bool $physically = false)
     {
-        $product = ($this->getProduct)($uuid);
-        $this->productManager->delete($product);
+        $product = ($this->getProduct)($id);
+        !$physically
+            ? $this->productManager->delete($product)
+            : $this->productManager->remove($product);
     }
 }

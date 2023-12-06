@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\Product\DeleteProduct;
 use App\Service\Product\GetProduct;
 use App\Service\Product\ProductManager;
 use Exception;
@@ -71,14 +72,24 @@ class ProductController extends AbstractFOSRestController
     }
 
     #[Rest\Delete('/{id}', name: 'delete')]
-    public function deleteAction(): Response
+    public function deleteAction(int $id, DeleteProduct $deleteProduct): Response
     {
-        return new JsonResponse('porduct soft deleted', Response::HTTP_OK);
+        try {
+            ($deleteProduct)($id);
+            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        } catch (Exception $exception) {
+            return new JsonResponse($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
     }
 
     #[Rest\Delete('/{id}/remove', name: 'remove')]
-    public function removeAction(): Response
+    public function removeAction(int $id, DeleteProduct $deleteProduct): Response
     {
-        return new JsonResponse('porduct phisical delete', Response::HTTP_OK);
+        try {
+            ($deleteProduct)($id, true);
+            return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        } catch (Exception $exception) {
+            return new JsonResponse($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
     }
 }
