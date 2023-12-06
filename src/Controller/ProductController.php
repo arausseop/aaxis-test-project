@@ -112,22 +112,22 @@ class ProductController extends AbstractFOSRestController
         return new JsonResponse('array porduct update', Response::HTTP_OK);
     }
 
-    #[Rest\Delete('/{id}', name: 'delete')]
-    public function deleteAction(int $id, DeleteProduct $deleteProduct): Response
+    #[Rest\Delete('/{sku}', name: 'delete')]
+    public function deleteAction(string $sku, DeleteProduct $deleteProduct): Response
     {
         try {
-            ($deleteProduct)($id);
+            ($deleteProduct)($sku);
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         } catch (Exception $exception) {
             return new JsonResponse($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
     }
 
-    #[Rest\Delete('/{id}/remove', name: 'remove')]
-    public function removeAction(int $id, DeleteProduct $deleteProduct): Response
+    #[Rest\Delete('/{sku}/remove', name: 'remove')]
+    public function removeAction(string $sku, DeleteProduct $deleteProduct): Response
     {
         try {
-            ($deleteProduct)($id, true);
+            ($deleteProduct)($sku, true);
             return new JsonResponse(null, Response::HTTP_NO_CONTENT);
         } catch (Exception $exception) {
             return new JsonResponse($exception->getMessage(), Response::HTTP_BAD_REQUEST);
