@@ -3,15 +3,11 @@ App\Entity\Product:
         id:
             groups:
                 - 'products'
-        name:
+        productName:
             groups:
                 - 'products'
                 - 'products-list'
         sku:
-            groups:
-                - 'products'
-                - 'products-list'
-        productName:
             groups:
                 - 'products'
                 - 'products-list'
