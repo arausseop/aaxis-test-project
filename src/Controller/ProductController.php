@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Service\Product\CreateProductFormProcessor;
 use App\Service\Product\DeleteProduct;
 use App\Service\Product\GetProduct;
+use App\Service\Product\GetProductBySku;
 use App\Service\Product\ProductManager;
+use App\Service\Product\UpdateProductFormProcessor;
 use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Route;
@@ -32,14 +35,14 @@ class ProductController extends AbstractFOSRestController
         return JsonResponse::fromJsonString($data, Response::HTTP_OK);
     }
 
-    #[Rest\Get('/{id}')]
+    #[Rest\Get('/{sku}')]
     public function getSingleAction(
-        int $id,
-        GetProduct $getProduct,
+        string $sku,
+        GetProductBySku $getProductBySku,
         SerializerInterface $serializer
     ) {
         try {
-            $product = ($getProduct)($id);
+            $product = ($getProductBySku)($sku);
         } catch (Exception $exception) {
             return View::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
         }
@@ -48,15 +51,53 @@ class ProductController extends AbstractFOSRestController
     }
 
     #[Rest\Post('', name: 'create')]
-    public function createAction(): Response
-    {
-        return new JsonResponse('porduct create', Response::HTTP_OK);
+    public function createAction(
+        CreateProductFormProcessor $createProductFormProcessor,
+        Request $request,
+        SerializerInterface $serializer,
+    ): Response {
+        try {
+
+            [$product, $error] = ($createProductFormProcessor)($request);
+            $statusCode = $product ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST;
+            $data = $product ?? $error;
+
+            if ($statusCode !== 201) {
+                return JsonResponse::fromJsonString($data, $statusCode);
+            } else {
+                $data = $serializer->serialize($product, 'json', ['groups' => ['products-create']]) ?? $error;
+
+                return JsonResponse::fromJsonString($data, $statusCode);
+            }
+        } catch (\Throwable $exception) {
+            return JsonResponse::fromJsonString($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
     }
 
-    #[Rest\Put('/{id}', name: 'update')]
-    public function updateAction(): Response
-    {
-        return new JsonResponse('porduct update', Response::HTTP_OK);
+    #[Rest\Put('/{sku}', name: 'update')]
+    public function updateAction(
+        string $sku,
+        UpdateProductFormProcessor $updateProductFormProcessor,
+        Request $request,
+        SerializerInterface $serializer,
+    ): Response {
+
+        try {
+
+            [$product, $error] = ($updateProductFormProcessor)($request, $sku);
+            $statusCode = $product ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST;
+            $data = $product ?? $error;
+
+            if ($statusCode !== 201) {
+                return JsonResponse::fromJsonString($data, $statusCode);
+            } else {
+                $data = $serializer->serialize($product, 'json', ['groups' => ['products-create']]) ?? $error;
+
+                return JsonResponse::fromJsonString($data, $statusCode);
+            }
+        } catch (\Throwable $exception) {
+            return JsonResponse::fromJsonString($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
     }
 
     #[Rest\Patch('/{id}', name: 'patch')]

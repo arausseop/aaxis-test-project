@@ -4,30 +4,32 @@ App\Entity\Product:
             groups:
                 - 'products-admin'
                 - 'products-list'
+                - 'products-create'
         productName:
             groups:
                 - 'products-admin'
                 - 'products-list'
-                - products-show
+                - 'products-show'
         sku:
             groups:
                 - 'products-admin'
                 - 'products-list'
-                - products-show
+                - 'products-show'
+                - 'products-create'
         description:
             groups:
                 - 'products-admin'
-                - products-show
+                - 'products-show'
         createdAt:
             groups:
                 - 'products-admin'
                 - 'products-list'
-                - products-show
+                - 'products-show'
         updatedAt:
             groups:
                 - 'products-admin'
                 - 'products-list'
-                - products-show
+                - 'products-show'
         deleted:
             groups:
                 - 'products-admin'

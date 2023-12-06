@@ -14,14 +14,26 @@ trait DeleteTimestampsTrait
     #[ORM\Column(name: 'deleted_at', type: 'datetime', nullable: true)]
     private $deletedAt;
 
+    public function isDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
+
+        return $this;
+    }
+
     public function getDeletedAt(): ?DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->deletedAt;
     }
 
     public function setDeletedAt(?DateTimeInterface $timestamp): self
     {
-        $this->createdAt = $timestamp;
+        $this->deletedAt = $timestamp;
         return $this;
     }
 
@@ -30,7 +42,7 @@ trait DeleteTimestampsTrait
     {
         if ($this->getDeletedAt() === null) {
             $this->deleted = true;
-            $this->setDeletedAt(new \DateTime());
+            $this->setDeletedAt(new \DateTimeImmutable());
         }
     }
 }
