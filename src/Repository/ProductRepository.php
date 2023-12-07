@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Model\Product\API\Filter\ProductFilter;
+use App\Model\Product\API\Response\PaginatedResponse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @extends ServiceEntityRepository<Product>
@@ -21,28 +25,35 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findByCriteria(ProductFilter $filter): PaginatedResponse
+    {
+        $page = $filter->page;
+        $limit = $filter->limit;
+        $sort = $filter->sort;
+        $order = $filter->order;
+        $searchText = $filter->searchText;
+        $sku = $filter->sku;
 
-//    public function findOneBySomeField($value): ?Product
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $qb = $this->createQueryBuilder('p');
+        $qb->orderBy(\sprintf('p.%s', $sort), $order);
+
+        if (null !== $searchText) {
+            $qb
+                ->andWhere('p.productName LIKE :searchText')
+                ->setParameter(':searchText', $searchText . '%');
+        }
+
+        if (null !== $sku) {
+            $qb
+                ->andWhere('p.sku LIKE :sku')
+                ->setParameter(':sku', $sku . '%');
+        }
+
+        $paginator = new Paginator($qb->getQuery());
+        $paginator->getQuery()
+            ->setFirstResult($limit * ($page - 1))
+            ->setMaxResults($limit);
+
+        return PaginatedResponse::create(iterator_to_array($paginator->getIterator()), $paginator->count(), $page, $limit);
+    }
 }
