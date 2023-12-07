@@ -40,7 +40,7 @@ class ProductDto
         return $this->id;
     }
 
-    public function getSku()
+    public function getSku(): ?string
     {
         return $this->sku;
     }

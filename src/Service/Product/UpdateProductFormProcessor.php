@@ -24,7 +24,7 @@ class UpdateProductFormProcessor
         $productDto = ProductDto::createFromProduct($product);
 
         $content = json_decode($request->getContent(), true, 512, \JSON_THROW_ON_ERROR);
-        $form = $this->formFactory->create(ProductFormType::class, $productDto);
+        $form = $this->formFactory->create(ProductFormType::class, $productDto, ['validation_groups' => ["Update"]]);
         $form->submit($content);
 
         if (!$form->isSubmitted()) {

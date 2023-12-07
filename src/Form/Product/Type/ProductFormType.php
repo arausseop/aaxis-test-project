@@ -25,7 +25,7 @@ class ProductFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => ProductDto::class,
             'csrf_protection' => false,
-            'validation_groups' => ["Default"]
+            // 'validation_groups' => ["Default"]
         ]);
     }
 

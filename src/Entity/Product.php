@@ -31,9 +31,9 @@ class Product
 
     public function __construct()
     {
-        $this->sku = null;
-        $this->productName = null;
-        $this->description = null;
+        // $this->sku = null;
+        // $this->productName = null;
+        // $this->description = null;
     }
     public function getId(): ?int
     {
@@ -45,7 +45,7 @@ class Product
         return $this->sku;
     }
 
-    public function setSku(string $sku): static
+    public function setSku(?string $sku): static
     {
         $this->sku = $sku;
 

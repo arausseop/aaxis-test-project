@@ -1,0 +1,33 @@
+App\Form\Product\DTO\ProductDto:
+    constraints:
+        - App\Validator\Constraints\UniqueDto:
+            fields: ['sku']
+            entityClass: 'App\Entity\Product'
+            message: 'Ya esta utilizado'
+            idFields: 
+                - 'id'
+            groups: ['Create', 'Update', 'BulkCreate', 'BulkUpdate']
+
+    properties:
+        productName:
+            - NotBlank:
+                groups: ['Create', 'Update', 'BulkCreate']
+            - NotNull:
+                groups: ['Create', 'Update', 'BulkCreate']
+            - Length:
+                min: 2
+                max: 250
+                minMessage: 'product name must be at least {{ limit }} characters long'
+                maxMessage: 'product name cannot be longer than {{ limit }} characters'
+                groups: ['Create', 'Update', 'BulkCreate', 'BulkUpdate']
+        sku:
+            - NotBlank:
+                groups: ['Create', 'Update', 'BulkCreate']
+            - NotNull:
+                groups: ['Create', 'Update','BulkCreate']
+            - Length:
+                min: 2
+                max: 50
+                minMessage: 'product sku must be at least {{ limit }} characters long'
+                maxMessage: 'product sku cannot be longer than {{ limit }} characters'
+                groups: ['Create', 'Update', 'BulkCreate', 'BulkUpdate']

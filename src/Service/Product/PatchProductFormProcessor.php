@@ -28,7 +28,7 @@ class PatchProductFormProcessor
 
         $paramsToUpdate = \array_keys($content);
 
-        $form = $this->formFactory->create(ProductFormType::class, $productDto);
+        $form = $this->formFactory->create(ProductFormType::class, $productDto, ['validation_groups' => ["BulkUpdate"]]);
         $form->submit($content);
 
         if (!$form->isSubmitted()) {

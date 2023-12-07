@@ -52,7 +52,7 @@ class BulkUpdateProductFormProcessor
             $product = ($this->getProductBySku)($validProduct['sku']);
             $productDto = ProductDto::createFromProduct($product);
 
-            $form = $this->formFactory->create(ProductFormType::class, $productDto);
+            $form = $this->formFactory->create(ProductFormType::class, $productDto, ['validation_groups' => ["BulkUpdate"]]);
             $form->submit($validProduct);
 
             if (!$form->isSubmitted()) {

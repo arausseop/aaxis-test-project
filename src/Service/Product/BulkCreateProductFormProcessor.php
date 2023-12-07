@@ -4,9 +4,11 @@ namespace App\Service\Product;
 
 use App\Form\Product\DTO\ProductDto;
 use App\Form\Product\Type\ProductFormType;
+use App\Model\Exception\CustomFormException;
 use App\Model\Exception\InvalidArgumentException;
 use Exception;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpFoundation\Request;
 
 class BulkCreateProductFormProcessor
@@ -25,9 +27,9 @@ class BulkCreateProductFormProcessor
     {
         $productsToCreate = json_decode($request->getContent(), true, 512, \JSON_THROW_ON_ERROR);
 
-        //TODO: THROW BAD REQUEST ERROR 
         if (empty($productsToCreate)) {
-            dd('return bad request error');
+            throw InvalidArgumentException::createFromMessage('Empty value Request');
+            // throw new BadRequestException('Empty value Request', 400);
         }
 
         $arrayProductsDto = [];
@@ -36,7 +38,14 @@ class BulkCreateProductFormProcessor
         foreach ($productsToCreate as $key => $productToCreate) {
             try {
                 $validProduct = $this->validateProduct($productToCreate);
-                array_push($arrayProductsDto, $validProduct);
+                if ($validProduct['error']) {
+
+                    array_push($arrayProductsErrors, ['product' => $productToCreate, 'error' => $validProduct['error']]);
+                } else {
+
+                    array_push($arrayProductsDto, $validProduct['productDto']);
+                }
+                // array_push($arrayProductsDto, $validProduct['productDto']);
             } catch (\Exception $ex) {
 
                 array_push($arrayProductsErrors, ['product' => $productToCreate, 'error' => $ex->getMessage()]);
@@ -62,24 +71,22 @@ class BulkCreateProductFormProcessor
         return [$arrayProductsCreated, null];
     }
 
-    private function validateProduct(array $productToCreate): ProductDto
+    private function validateProduct(array $productToCreate)
     {
 
         $productDto = ProductDto::createEmpty();
 
-        $form = $this->formFactory->create(ProductFormType::class, $productDto);
+        $form = $this->formFactory->create(ProductFormType::class, $productDto, ['validation_groups' => ["BulkCreate"]]);
         $form->submit($productToCreate);
 
         if (!$form->isSubmitted()) {
             return [null, 'Form is not submitted'];
         }
 
-        //TODO: THROW Validate Error 
         if (!$form->isValid()) {
-            dd('invalid form', $form->getErrors());
-            // return [null, $form];
+            return ['productDto' => null, 'error' => $form];
         }
 
-        return $productDto;
+        return ['productDto' => $productDto, "error" => null];
     }
 }
