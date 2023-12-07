@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\Product\API\Filter\ProductFilter;
 use App\Service\Product\BulkCreateProductFormProcessor;
 use App\Service\Product\BulkUpdateProductFormProcessor;
 use App\Service\Product\CreateProductFormProcessor;
@@ -17,6 +18,7 @@ use Exception;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\Annotations\QueryParam;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -28,15 +30,37 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ProductController extends AbstractFOSRestController
 {
     #[Rest\Get('', name: 'list')]
+    #[QueryParam(name: 'page', requirements: '\d+', strict: false, nullable: true, allowBlank: true, description: 'page number')]
+    #[QueryParam(name: 'limit', requirements: '\d+', strict: false, nullable: true, allowBlank: true, description: 'items Per Page')]
+    #[QueryParam(name: 'sort', strict: false, nullable: true, allowBlank: true, description: 'Field to sort')]
+    #[QueryParam(name: 'order', strict: false, nullable: true, allowBlank: true, description: 'Order method ')]
+    #[QueryParam(name: 'searchText', strict: false, nullable: true, allowBlank: true, description: 'Text to search')]
+    #[QueryParam(name: 'sku', strict: false, nullable: true, allowBlank: true, description: 'search by sku')]
     public function getAction(
+        ?int $page,
+        ?int $limit,
+        ?string $sort,
+        ?string $order,
+        ?string $searchText,
+        ?string $sku,
         ProductManager $productManager,
         SerializerInterface $serializer,
         Request $request,
-    ): Response {
+    ) {
 
-        $products =  $productManager->getRepository()->findAll();
-        $data = $serializer->serialize($products, 'json', ['groups' => ['products-list']]);
-        return JsonResponse::fromJsonString($data, Response::HTTP_OK);
+        $productFilter = new ProductFilter(
+            $page,
+            $limit,
+            $sort,
+            $order,
+            $searchText,
+            $sku
+        );
+
+        $productsResponse =  $productManager->getRepository()->findByCriteria($productFilter);
+        $data = json_decode($serializer->serialize($productsResponse->getItems(), 'json', ['groups' => ['products-list']]), true, 512, JSON_THROW_ON_ERROR);
+
+        return new JsonResponse(['items' => $data, 'meta' => $productsResponse->getMeta()], Response::HTTP_OK);
     }
 
     #[Rest\Get('/{sku}')]
