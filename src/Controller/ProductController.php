@@ -135,7 +135,7 @@ class ProductController extends AbstractFOSRestController
         PatchProductFormProcessor $patchProductFormProcessor,
         Request $request,
         SerializerInterface $serializer,
-    ): Response {
+    ) {
 
         try {
 
@@ -155,7 +155,7 @@ class ProductController extends AbstractFOSRestController
         }
     }
 
-    #[Rest\Put('/bulk/update', name: 'bulk-update')]
+    #[Rest\Patch('/bulk/update', name: 'bulk-update')]
     public function bulkUpdateAction(
         BulkUpdateProductFormProcessor $bulkUpdateProductFormProcessor,
         Request $request,
