@@ -11,10 +11,6 @@ class ProductDto
     public ?string $sku = "";
     public ?string $productName = "";
     public ?string $description = "";
-    public ?bool $deleted = null;
-    public ?DateTimeInterface $createdAt = null;
-    public ?DateTimeInterface $updatedAt = null;
-    public ?DateTimeInterface $deletedAt = null;
 
     public function __construct()
     {
@@ -34,10 +30,6 @@ class ProductDto
         $dto->sku = $product->getSku();
         $dto->productName = $product->getProductName();
         $dto->description = $product->getDescription();
-        $dto->deleted = $product->isDeleted();
-        $dto->createdAt = $product->getCreatedAt();
-        $dto->updatedAt = $product->getUpdatedAt();
-        $dto->deletedAt = $product->getDeletedAt();
 
         return $dto;
     }
@@ -61,25 +53,5 @@ class ProductDto
     public function getDescription()
     {
         return $this->description;
-    }
-
-    public function isDeleted()
-    {
-        return $this->eleted;
-    }
-
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
     }
 }
