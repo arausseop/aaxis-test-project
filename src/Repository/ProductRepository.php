@@ -35,7 +35,10 @@ class ProductRepository extends ServiceEntityRepository
         $sku = $filter->sku;
 
         $qb = $this->createQueryBuilder('p');
-        $qb->orderBy(\sprintf('p.%s', $sort), $order);
+        $qb
+            ->andWhere('p.deleted = :deleted')
+            ->setParameter(':deleted', false)
+            ->orderBy(\sprintf('p.%s', $sort), $order);
 
         if (null !== $searchText) {
             $qb

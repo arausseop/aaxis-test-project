@@ -3,5 +3,5 @@ kernel:
     type: annotation
 
 api:
-    resource: ../../src/Controller
+    resource: ../../src/Controller/API
     type: attribute

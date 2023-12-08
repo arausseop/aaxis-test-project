@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\API\Product;
 
 use App\Model\Exception\DatabaseException;
 use App\Model\Product\API\Filter\ProductFilter;
