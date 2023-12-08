@@ -1,0 +1,93 @@
+@use '~@angular/material' as mat;
+@import "style.theme";
+
+@include mat.core();
+$my-app-primary: mat.define-palette(mat.$grey-palette, 800);
+$my-app-accent:  mat.define-palette(mat.$lime-palette);
+$my-app-warn:    mat.define-palette(mat.$red-palette);
+$my-app-theme: mat.define-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include mat.all-component-themes($my-app-theme);
+
+// Material Icons
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+}
+
+.material-icons.md-48 {
+  font-size: 48px;
+}
+
+.material-icons.md-78 {
+  font-size: 78px;
+}
+
+html{
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: $app-background;
+  color: #212121;
+}
+
+
+.app-container {
+  width: 100vw;
+  max-width: $app-max-width;
+  margin: 0 auto;
+}
+
+
+section {
+  min-height: $app-min-height;
+  z-index: 0;
+  max-width: 1100px;
+  margin: 75px auto;
+}
+
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  z-index: 99;
+}
+
+.mat-form-field{
+  width: 100vw;
+  max-width: 300px;
+  margin-right: 16px;
+}
+
+.second-toolbar{
+  margin-top: 60px;
+  //background: mat-palette($mat-purple, 800);
+}
+
+[hidden]{
+  display: none !important;
+}
+
+
+.custom-snacks {
+  min-width: 50vw !important;
+  margin-bottom: 8px !important;
+
+  .mat-simple-snackbar{
+    font-size: medium;
+    line-height: 28px !important;
+  }
+}

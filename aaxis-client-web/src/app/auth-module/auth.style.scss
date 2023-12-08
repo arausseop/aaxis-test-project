@@ -1,0 +1,69 @@
+@use '~@angular/material' as mat;
+@import "../../style.theme";
+
+.account-container {
+
+  form {
+
+    background: white;
+    position: relative;
+    max-width: 90vw;
+    width: 700px;
+    padding: 30px 45px;
+    margin: 0 auto;
+    background: white;
+    @include mat.elevation(8);
+    @include border-radius(8px);
+
+    a {
+      color: black;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+
+    mat-form-field {
+      //max-width: 85vw;
+      max-width: 100%;
+      min-width: 220px;
+      margin: 8px 24px 8px 0;
+      flex: 1;
+    }
+
+    .action-buttons {
+      margin-top: 28px;
+    }
+
+    .submit-button {
+      width: 160px;
+      height: 45px;
+    }
+
+    .submit-button[disabled] {
+      background-color: rgba(0, 0, 0, 0.12) !important;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 8px;
+      right: -55px;
+    }
+
+    .secondary-option {
+
+      text-decoration: underline;
+      color: grey;
+      margin: 0 0 0 -8px;
+      padding: 0 8px;
+
+      &:hover {
+        background: transparent !important;
+      }
+
+      &:focus {
+        background: transparent !important;
+      }
+
+    }
+  }
+
+}
