@@ -1,0 +1,68 @@
+<section 
+         class="account-container expand-section"
+         fxLayout='column'
+         >
+	
+		<mat-card class="example-card">
+			<mat-card-header>
+				<mat-card-title>Product Module</mat-card-title>
+				<mat-card-subtitle>List</mat-card-subtitle>
+				<mat-card-actions class="ml-a" align="end">
+					<button (click)="openNewFormDialog()" mat-fab class="mr-20" color="primary" aria-label="new Product button">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <!--<button mat-button>New Product</button>-->
+				</mat-card-actions>
+			</mat-card-header>
+			
+			<mat-card-content *ngIf="productService.products">
+				
+				<table mat-table [dataSource]="listProductsDataSource" class="expand-table mat-elevation-z1">
+                        <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema; index as i">
+
+                        </ng-container>
+                        <!-- Position Column -->
+                        <ng-container matColumnDef="position">
+                            <th mat-header-cell *matHeaderCellDef> No. </th>
+                            <td mat-cell *matCellDef="let element">  </td>
+                        </ng-container>
+
+                        <!-- SKU Column -->
+                        <ng-container matColumnDef="sku">
+                            <th mat-header-cell *matHeaderCellDef> Product SKU </th>
+                            <td mat-cell *matCellDef="let element"> {{element.sku}} </td>
+                        </ng-container>
+
+                        <!-- ProductName Column -->
+                        <ng-container matColumnDef="productName">
+                            <th mat-header-cell *matHeaderCellDef> Product Name </th>
+                            <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+                        </ng-container>
+                        
+                        <!-- Product Actions -->
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef class="width-15"> Actions </th>
+                            <td mat-cell *matCellDef="let element"> 
+                                
+                                <button (click)="openShowFormDialog(element.sku)" mat-icon-button class="button-info" aria-label="">
+                                    <mat-icon>visibility</mat-icon>
+                                </button>
+                                <button (click)="deleteProductForm(element.sku)" mat-icon-button class="button-danger" aria-label="">
+                                    <mat-icon>delete</mat-icon>
+                                </button>                            
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+				<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+								showFirstLastButtons
+								aria-label="Select page of periodic elements">
+				</mat-paginator>
+			</mat-card-content>
+			
+		</mat-card>
+
+</section>

@@ -1,0 +1,6 @@
+App\Entity\Product:
+    product{1..10}:
+        productName: <sentence(3)>
+        sku: <bothify('????-??-##-##')>
+        description: <realTextBetween(50, 200)>
+        createdAt: <date_create()>

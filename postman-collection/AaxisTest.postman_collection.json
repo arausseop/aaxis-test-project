@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "c139960a-a672-4eed-b198-f18db0c088e9",
+		"name": "AaxisTest",
+		"description": "Request Collections for Aaxis rest api.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1566317"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "HealtCheck",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/health-check",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"health-check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/products",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "name",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "desc",
+									"disabled": true
+								},
+								{
+									"key": "searchText",
+									"value": "producto 2",
+									"disabled": true
+								},
+								{
+									"key": "sku",
+									"value": "ashd-asd-asdasd-asda",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductBySku",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/ashd-asd-asdasd-asda",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"ashd-asd-asdasd-asda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductBySku",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/ashd-asd-asdasd-asda",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"ashd-asd-asdasd-asda"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "RemoveProductBySku",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/ashd-asd-asdasd-asda/remove",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"ashd-asd-asdasd-asda",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\": \"ashd-asd-asdasd-asd\",\n    \"productName\": \"akjbkjbkbk\",\n    \"description\": \"Esto e una bree descripción del producto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/products",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProductBySku",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sku\": \"ashd-asd-asdasd-asd\",\n    \"productName\": \"Prueba PRoducto edited\",\n    \"description\": \"Esto e una bree descripción del producto\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/ashd-asd-asdasd-asd",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"ashd-asd-asdasd-asd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BulkUpdateProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"sku\": \"odza-rm-75-27\",\n        \"productName\": \"producto 1 edited\"\n        \n    },\n    {\n        \"sku\": \"ezpa-xz-12-42\",\n        \"productName\": \"producto 2\",\n        \"description\": \"Esto es producto  2\"\n    },\n    {\n        \"sku\": \"ojzd-bs-03-59\",\n        \"productName\": \"producto 3\",\n        \"description\": \"Esto es producto 3\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/bulk/update",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"bulk",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BulkCreateProducts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"sku\": \"osadsadasdad\",\n        \"productName\": \"pasdasdsad\",\n        \"description\": \"Esto producto 1\"\n    },\n    {\n        \"sku\": \"ezpa-xz-12-4246as\",\n        \"productName\": \"producto 2\",\n        \"description\": \"Esto es producto  2\"\n    },\n    {\n        \"sku\": \"ojzd-bs-03-5967as\",\n        \"productName\": \"producto 3\",\n        \"description\": \"Esto es producto 3\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/bulk/create",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"bulk",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PartialUpdateProductBySku",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDE5MjcxNTAsImV4cCI6MTcwNzExMTE1MCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiYXJhdXNzZW9AZ21haWwuY29tIiwibmFtZSI6IkFsY2lkZXMgUmF1dXNlbyJ9.HKSaWA7_aeTuwVcISTAWNgKwft6WENBfJU81DmfoJThxKP9NtzrVZY5OzRGU7KFyUQ4hJexXigrV4Ah6PpmlUpgplwJhkclR18zxg2qzIEoIU8PewEaGYiqBKxKZQno3Wn5uRfC98YWXMlYBpQzRNSw7G3AOsR1-LFRl7i02OzD1bbXP-DE3_SsN2tXYBUn1y-SoS3kYJF7UqCqVz7S7i53o8KfMHbZYxHuUIeabhW33Xd_DYhU5dW3gC0_cA-s2wZHxOOc-0Fhh8HMiSuUbdPQ-_Lq4RBJd40JfA-hb0-N-E7Gs7Xlvb3J8pCcUTVVLoKeEn2VMaIP31MGrklygcg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"productName\": \"aasdasdasd\",\n    \"description\": \"description edited\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/products/ashd-asd-asdasd-asd6",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"products",
+								"ashd-asd-asdasd-asd6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"username\":\"arausseo@gmail.com\",\n    \"password\":\"123456\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "127.0.0.1:8000/api/login_check",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"login_check"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

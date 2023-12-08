@@ -1,0 +1,43 @@
+App\Entity\Product:
+    attributes:
+        id:
+            groups:
+                - 'products-admin'
+        productName:
+            groups:
+                - 'products-admin'
+                - 'products-list'
+                - 'products-show'
+                - 'products-update'
+                - 'bulk-products-create'
+                - 'bulk-products-update'
+        sku:
+            groups:
+                - 'products-admin'
+                - 'products-list'
+                - 'products-show'
+                - 'products-create'
+                - 'products-update'
+                - 'bulk-products-create'
+                - 'bulk-products-update'
+        description:
+            groups:
+                - 'products-admin'
+                - 'products-show'
+                - 'products-update'
+        createdAt:
+            groups:
+                - 'products-admin'
+                - 'products-list'
+                - 'products-show'
+                - 'products-update'
+        updatedAt:
+            groups:
+                - 'products-admin'
+                - 'products-show'
+        deleted:
+            groups:
+                - 'products-admin'
+        deletedAt:
+            groups:
+                - 'products-admin'

@@ -1,0 +1,27 @@
+App\Form\Model\User\UserDto:
+    constraints:
+        - App\Validator\Constraints\UniqueDto:
+            fields: ['dni']
+            entityClass: 'App\Entity\Main\User'
+            message: 'Rut ya esta utilizado'
+            idFields: 
+                - 'uuid'
+        - App\Validator\Constraints\UniqueDto:
+            fields: ['email']
+            entityClass: 'App\Entity\Main\User'
+            message: 'Email ya existe'
+            idFields: 
+                - 'uuid'
+    properties:
+        dni:
+            # - App\Validator\UniqueCustomConstraint: ~
+            # - NotNull:
+            #     groups: [Default]
+            - NotBlank:
+                groups: [Default]
+        email:
+            # - App\Validator\UniqueCustomConstraint: ~
+            # - NotNull:
+            #     groups: [Default]
+            - NotBlank:
+                groups: [Default]
