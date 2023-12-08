@@ -9,11 +9,6 @@ import { Product } from 'src/app/auth-module/product.model';
 import { ProductShowComponent } from '../product-show/product-show.component';
 import * as _ from 'lodash';
 
-export interface ProductElement {
-  productName: string;
-  sku: string;
-  description?: string;
-}
 
 @Component({
   selector: 'app-product-list',
@@ -21,8 +16,8 @@ export interface ProductElement {
   styleUrls: ['./product-list.component.scss']
 })
 export class ProductListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['position', 'productName', 'sku', 'actions'];
-  listProductsDataSource = new MatTableDataSource<ProductElement>();
+  displayedColumns: string[] = ['productName', 'sku', 'image', 'actions'];
+  listProductsDataSource = new MatTableDataSource<Product>();
 
   private currentProductSku: string;
 
@@ -42,8 +37,11 @@ export class ProductListComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
-      // this.animal = result;
+      if (result) {
+
+        this.addDatasourseProduct(result);
+      }
+
     });
   }
 
@@ -58,8 +56,10 @@ export class ProductListComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.updateDatasourseProduct(result);
-      console.log('The dialog was closed', result);
+      if (result) {
+
+        this.updateDatasourseProduct(result);
+      }
 
     });
   }
@@ -78,11 +78,17 @@ export class ProductListComponent implements AfterViewInit {
     })
   }
 
+  addDatasourseProduct(product) {
+
+    this.listProductsDataSource.data = [product, ...this.listProductsDataSource.data]
+
+  }
+
 
   deleteProductForm($productSku) {
     this.productService.delete(this, $productSku);
     this.listProductsDataSource.data = this.listProductsDataSource.data.filter(
-      (p: ProductElement, k) => p.sku !== $productSku,
+      (p: Product, k) => p.sku !== $productSku,
     )
     console.log('delete');
   }

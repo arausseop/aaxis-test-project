@@ -7,12 +7,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/auth-module/product.model';
 
-export interface ProductElement {
-  productName: string;
-  sku: string;
-  description?: string;
-}
-
 @Component({
   selector: 'app-product-show',
   templateUrl: './product-show.component.html',
@@ -24,7 +18,7 @@ export class ProductShowComponent implements OnInit {
   @Input() productSku: any;
 
   displayedColumns: string[] = ['productName', 'sku', 'actions'];
-  productDataSource = new MatTableDataSource<ProductElement>();
+  productDataSource = new MatTableDataSource<Product>();
 
   showAddButton: boolean = true;
   showSaveArrayButton: boolean = true;
