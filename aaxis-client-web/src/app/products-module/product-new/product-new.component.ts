@@ -6,12 +6,6 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Product } from 'src/app/auth-module/product.model';
 
-export interface ProductElement {
-  productName: string;
-  sku: string;
-  description?: string;
-}
-
 @Component({
   selector: 'app-product-new',
   templateUrl: './product-new.component.html',
@@ -21,7 +15,7 @@ export interface ProductElement {
 export class ProductNewComponent implements OnInit {
 
   displayedColumns: string[] = ['productName', 'sku', 'actions'];
-  productDataSource = new MatTableDataSource<ProductElement>();
+  productDataSource = new MatTableDataSource<Product>();
 
   showAddButton: boolean = true;
   showSaveArrayButton: boolean = true;
@@ -78,7 +72,7 @@ export class ProductNewComponent implements OnInit {
   removeProductForm($productSku) {
 
     this.productDataSource.data = this.productDataSource.data.filter(
-      (p: ProductElement, k) => p.sku !== $productSku,
+      (p: Product, k) => p.sku !== $productSku,
     )
     const index = this.productsFormType.value.findIndex(product => product.sku === $productSku)
     this.productsFormType.removeAt(index)

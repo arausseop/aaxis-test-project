@@ -12,6 +12,12 @@
     width: 100%;
 }
 
+.rounded-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%
+}
+
 .example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
@@ -41,16 +47,17 @@
     width: 10%;
 }
 
-.text-center {
-    text-align: center;
-}
 
 table td {
 
-    text-align: center;
+    text-align: left;
 }
 
 table th {
 
-    text-align: center;
+    text-align: left;
+}
+
+.text-center {
+    text-align: center !important;
 }
